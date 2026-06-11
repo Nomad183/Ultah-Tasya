@@ -11,49 +11,49 @@
         body {
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Alur dimulai dari atas agar scroll bekerja dengan benar */
+            align-items: flex-start; 
             min-height: 100vh;
             background-color: #fdf3f4; /* Background pink susu lembut */
-            font-family: 'Caveat', cursive; /* Font utama DIY */
+            font-family: 'Caveat', cursive; 
             margin: 0;
             padding: 20px;
             box-sizing: border-box;
-            overflow-y: auto; /* Sekarang seluruh halaman web bisa di-scroll jika penuh */
+            overflow-y: auto; /* Halaman utama bisa di-scroll jika layar hp kecil */
         }
 
+        /* CONTAINER UTAMA */
         .container {
             position: relative;
             width: 350px;
-            height: 380px;
-            /* Beri jarak atas (margin-top) agar saat surat ditarik ke atas, 
-               ia berada di area yang aman dan bisa di-scroll, tidak menembus batas atas browser */
-            margin-top: 200px; 
+            height: 420px;
+            margin-top: 220px; /* Jarak aman di atas agar saat surat naik tidak terpotong layar */
             margin-bottom: 100px;
+            cursor: pointer;
         }
 
-        /* Bagian belakang amplop (craft paper) */
+        /* 1. BAGIAN BELAKANG AMPLOP */
         .envelope-back {
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 350px;
+            height: 420px;
             background-color: #c99368; 
-            border-radius: 5px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
 
-        /* SURAT UTAMA (Bagian yang ditarik) */
+        /* 2. SURAT UTAMA (Tersembunyi sempurna di dalam) */
         .letter {
             position: absolute;
-            bottom: 10px;
-            left: 10px;
-            width: 330px;
-            height: 450px; /* Tinggi disesuaikan agar pas di dalam amplop */
-            background-color: #fffaf0; /* Kertas putih tulang hangat */
+            bottom: 10px; /* Duduk manis di atas dasar amplop, tidak akan bocor ke bawah */
+            left: 15px;
+            width: 320px;
+            height: 400px; /* Tinggi disesuaikan agar pas bersembunyi di dalam amplop 420px */
+            background-color: #fffaf0; 
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             
-            /* Animasi tarikan ketika diklik */
+            /* Animasi keluar masuk yang sangat mulus */
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1;
             
@@ -61,21 +61,15 @@
             flex-direction: column;
             padding: 25px 20px;
             box-sizing: border-box;
-            cursor: pointer;
             overflow: hidden;
         }
 
-        /* Posisi awal surat agak tenggelam di dalam amplop */
-        .letter {
-            transform: translateY(100px);
-        }
-
-        /* KELAS ANIMASI: Menarik surat ke atas secara proporsional */
+        /* KELAS ANIMASI: Menarik surat keluar ke atas */
         .letter.pulled {
-            transform: translateY(-180px); 
+            transform: translateY(-330px); /* Keluar ke atas dengan pas */
         }
 
-        /* Tombol PULL ME (Tab pink di atas) */
+        /* TOMBOL PEGANGAN / TAB PENARIK */
         .pull-tab {
             position: absolute;
             top: -28px;
@@ -83,11 +77,11 @@
             transform: translateX(-50%);
             background-color: #ff8fa3; 
             color: white;
-            padding: 5px 20px;
+            padding: 5px 22px;
             border-radius: 12px 12px 0 0;
             font-size: 1.4rem;
             font-weight: bold;
-            box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+            box-shadow: 0 -3px 6px rgba(0,0,0,0.05);
             animation: bounce 2s infinite; 
             z-index: 10;
         }
@@ -98,30 +92,22 @@
             60% { transform: translate(-50%, -4px); }
         }
 
-        /* AREA KONTEN SURAT (Bisa di-scroll secara internal jika teks panjang) */
+        /* AREA KONTEN PUISI (Bisa di-scroll mandiri) */
         .letter-content {
             color: #4a4a4a;
             height: 100%;
             display: flex;
             flex-direction: column;
-            overflow-y: auto; /* Mengaktifkan scroll internal khusus untuk teks puisi */
-            padding-right: 8px; /* Ruang untuk scrollbar */
+            overflow-y: auto; 
+            padding-right: 5px;
             box-sizing: border-box;
         }
 
-        /* Menghias scrollbar internal surat agar tetap lucu dan estetik (Pink) */
-        .letter-content::-webkit-scrollbar {
-            width: 6px;
-        }
-        .letter-content::-webkit-scrollbar-track {
-            background: #fffaf0;
-        }
-        .letter-content::-webkit-scrollbar-thumb {
-            background-color: #ff8fa3;
-            border-radius: 10px;
-        }
+        /* Hiasan scrollbar internal surat */
+        .letter-content::-webkit-scrollbar { width: 5px; }
+        .letter-content::-webkit-scrollbar-track { background: #fffaf0; }
+        .letter-content::-webkit-scrollbar-thumb { background-color: #ff8fa3; border-radius: 10px; }
 
-        /* Judul Surat */
         .letter h2 {
             font-family: 'Pinyon Script', cursive;
             color: #d81b60; 
@@ -133,7 +119,6 @@
             position: relative;
         }
 
-        /* Kupu-kupu di dekat judul */
         .letter h2::after {
             content: "🦋";
             position: absolute;
@@ -142,7 +127,6 @@
             font-size: 1.3rem;
         }
 
-        /* Gaya teks PUISI */
         .poem-body {
             font-size: 1.4rem; 
             line-height: 1.4; 
@@ -159,52 +143,105 @@
             text-align: right;
             font-size: 1.4rem;
             margin-top: 15px;
-            margin-bottom: 50px; /* Jarak bawah agar tidak tertutup kelinci */
+            margin-bottom: 60px; 
             color: #d81b60;
         }
 
-        /* Kelinci imut di sudut kiri bawah */
+        /* Kelinci di dalam surat */
         .cute-bunny {
             position: absolute;
             bottom: 10px;
             left: 15px;
             font-size: 3rem;
-            pointer-events: none; /* Klik bisa menembus kelinci */
+            pointer-events: none;
             z-index: 5;
         }
 
-        /* Bagian depan amplop (membentuk kantong segitiga) */
+        /* 3. BAGIAN DEPAN AMPLOP (Kantong segitiga) */
         .envelope-front {
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 350px;
+            height: 420px;
             background-color: #e2b485; 
-            border-radius: 5px;
+            border-radius: 8px;
             z-index: 2; 
-            pointer-events: none; 
+            pointer-events: none; /* Klik bisa tembus ke surat */
             
-            /* Sisi lipatan amplop */
-            border-top: 175px solid transparent;
+            /* Pembentuk lipatan kertas */
+            border-top: 210px solid transparent;
             border-right: 175px solid #d4a373; 
-            border-bottom: 175px solid #d4a373;
+            border-bottom: 210px solid #d4a373;
             border-left: 175px solid #e2b485;
             box-sizing: border-box;
+        }
+
+        /* 4. LAPISAN HIASAN DI ATAS KRAFT PAPER (AMPLOP) */
+        .envelope-decor {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3; /* Berada paling depan di atas amplop */
+            pointer-events: none; /* Sentuhan menembus ke sistem penarik */
+        }
+
+        /* Label nama bergaya aesthetic rustic di tengah amplop */
+        .envelope-label {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-3deg);
+            background-color: #fffaf0;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-size: 1.6rem;
+            color: #5d4037;
+            font-weight: bold;
+            box-shadow: 2px 4px 10px rgba(0,0,0,0.15);
+            border: 1px dashed #d4a373;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* Hiasan Bunga-bunga di pojok kiri atas kraft paper */
+        .decor-flowers-top {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 2.2rem;
+            opacity: 0.9;
+            filter: drop-shadow(1px 2px 2px rgba(0,0,0,0.1));
+        }
+
+        /* Hiasan Hewan Imut & Bunga di pojok kanan bawah kraft paper */
+        .decor-animals-bottom {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            font-size: 2.5rem;
+            opacity: 0.95;
+            filter: drop-shadow(1px 2px 2px rgba(0,0,0,0.1));
+            text-align: right;
+            line-height: 1;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- Layer 1: Belakang Amplop -->
+    <!-- Klik di area mana saja pada amplop akan memicu keluar/masuknya surat -->
+    <div class="container" onclick="toggleLetter()">
+        
+        <!-- Lapisan 1: Belakang Amplop -->
         <div class="envelope-back"></div>
         
-        <!-- Layer 2: Surat (Yang bisa ditarik & di-scroll) -->
-        <div class="letter" id="birthdayLetter" onclick="toggleLetter()">
-            <!-- Tombol Penarik -->
+        <!-- Lapisan 2: Surat Utama -->
+        <div class="letter" id="birthdayLetter">
+            <!-- Pegangan surat -->
             <div class="pull-tab">Tarik Aku ↑</div>
             
-            <!-- Konten Isi Surat dengan Scrollbar Internal -->
+            <!-- Isi Teks Puisi (StopPropagation mencegah surat tertutup otomatis saat scroll teks) -->
             <div class="letter-content" onclick="event.stopPropagation();">
                 <h2>Selamat Ulang Tahun</h2>
                 
@@ -241,16 +278,32 @@
                 </div>
             </div>
 
-            <!-- Hewan Imut: Kelinci -->
+            <!-- Hewan di dalam surat -->
             <div class="cute-bunny">🐰</div>
         </div>
 
-        <!-- Layer 3: Depan Amplop -->
+        <!-- Lapisan 3: Depan Amplop -->
         <div class="envelope-front"></div>
+
+        <!-- Lapisan 4: Hiasan Luar Kraft Paper (Bunga & Hewan Luar) -->
+        <div class="envelope-decor">
+            <!-- Bunga di kiri atas amplop -->
+            <div class="decor-flowers-top">🌸🌷🌿</div>
+            
+            <!-- Label Tag Tengah -->
+            <div class="envelope-label">Untuk: Tasya Aulia ✨</div>
+            
+            <!-- Hewan & Bunga di kanan bawah amplop -->
+            <div class="decor-animals-bottom">
+                <span>🌻🌾</span><br>
+                <span>🐱 hbd!</span>
+            </div>
+        </div>
+        
     </div>
 
     <script>
-        // Fungsi untuk naik turunkan surat saat diklik
+        // Fungsi interaktif untuk tarik-masuk surat secara bergantian (Toggle)
         function toggleLetter() {
             const letter = document.getElementById('birthdayLetter');
             letter.classList.toggle('pulled');

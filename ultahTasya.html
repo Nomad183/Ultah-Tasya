@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handmade Pull Card</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fdf3f4; /* Soft blush background */
+            font-family: 'Caveat', cursive; /* Handwritten DIY feel */
+            margin: 0;
+            overflow: hidden; /* Prevents scrolling when the card pulls up */
+        }
+
+        .container {
+            position: relative;
+            width: 320px;
+            height: 250px;
+        }
+
+        /* The back of the envelope */
+        .envelope-back {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 200px;
+            background-color: #c99368; /* Darker craft paper color */
+            border-radius: 5px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        /* The Letter inside */
+        .letter {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            width: 300px;
+            height: 380px;
+            background-color: #fffaf0; /* Warm off-white paper */
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1; /* Sits between the back and front of the envelope */
+            display: flex;
+            flex-direction: column;
+            padding: 25px 20px;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+
+        /* The animation class that slides the letter up */
+        .letter.pulled {
+            transform: translateY(-240px);
+        }
+
+        /* The little tab sticking out the top */
+        .pull-tab {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ff8fa3;
+            color: white;
+            padding: 4px 18px;
+            border-radius: 10px 10px 0 0;
+            font-size: 1.4rem;
+            animation: bounce 2s infinite; /* Gentle bouncing animation */
+        }
+
+        /* Keyframes for the bouncing tab to grab attention */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+            40% { transform: translate(-50%, -8px); }
+            60% { transform: translate(-50%, -4px); }
+        }
+
+        .letter-content {
+            color: #4a4a4a;
+        }
+
+        .letter h2 {
+            color: #d81b60; /* Deep pink for the header */
+            margin-bottom: 5px;
+            font-size: 2.2rem;
+            text-align: center;
+        }
+
+        .letter p {
+            font-size: 1.5rem;
+            line-height: 1.1;
+            margin: 8px 0;
+        }
+
+        /* The front of the envelope that hides the bottom of the letter */
+        .envelope-front {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 200px;
+            background-color: #e2b485; /* Main craft paper color */
+            border-radius: 5px;
+            z-index: 2; /* Sits in front of the letter */
+            pointer-events: none; /* Allows you to click the letter "through" the envelope */
+            
+            /* CSS trick to create the folded envelope triangles */
+            border-top: 100px solid transparent;
+            border-right: 160px solid #d4a373;
+            border-bottom: 100px solid #d4a373;
+            border-left: 160px solid #e2b485;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="envelope-back"></div>
+        
+        <div class="letter" id="myLetter" onclick="toggleLetter()">
+            <div class="pull-tab">Pull Me ↑</div>
+            <div class="letter-content">
+                <h2>Happy Birthday!</h2>
+                <p>Dearest You,</p>
+                <p>I hope your day is as bright and wonderful as this little handmade card.</p>
+                <p>Wishing you all the best today, tomorrow, and always!</p>
+                <p style="text-align: right; margin-top: 20px;">With Love, <br>Your Name</p>
+            </div>
+        </div>
+
+        <div class="envelope-front"></div>
+    </div>
+
+    <script>
+        // Simple JavaScript to toggle the 'pulled' class when clicked
+        function toggleLetter() {
+            const letter = document.getElementById('myLetter');
+            letter.classList.toggle('pulled');
+        }
+    </script>
+
+</body>
+</html>

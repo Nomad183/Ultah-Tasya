@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Untuk Tasya Aulia</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, sans-serif; 
+            text-align: center; 
+            background: #fff5f7; 
+            margin: 0; 
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .card { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 25px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+            width: 90%; 
+            max-width: 400px;
+            cursor: pointer; 
+            transition: transform 0.2s;
+        }
+        .card:active { transform: scale(0.95); }
+        h1 { color: #ff4d6d; font-size: 1.5rem; }
+        #message { display: none; margin-top: 30px; color: #444; line-height: 1.6; }
+        em { color: #d63384; font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <div class="card" onclick="bukaKejutan()">
+        <h1 style="font-size: 3rem;">🎁</h1>
+        <p>Sentuh kotak ini untuk membuka pesan spesial!</p>
+    </div>
+
+    <div id="message">
+        <h2 style="color: #ff4d6d;">Selamat Ulang Tahun, Tasya Aulia!</h2>
+        <p style="white-space: pre-line;">
+            <em>"Di antara langkah yang terus berpijak,
+            Hari ini, waktu sejenak berbisik tenang.
+            Membawa cerita tentang doa yang tak pernah lelah tergerak,
+            Tentang mimpi-mimpi indah yang perlahan mulai terang.
+
+            Tasya Aulia,
+            Di usia yang baru, ku titipkan doa dalam sunyi,
+            Semoga langkahmu selalu ringan meniti hari.
+            Setiap harap yang kau simpan dalam hati,
+            Tuhan dekap, menjadikannya nyata di waktu yang pasti.
+
+            Teruslah bermimpi, meski langit tampak tinggi,
+            Sebab di matamu, masa depan telah menanti.
+            Selamat ulang tahun, semoga bahagia selalu memelukmu,
+            Dalam setiap detik yang kau lalui sepanjang waktu."</em>
+        </p>
+    </div>
+
+    <script>
+        function bukaKejutan() {
+            document.getElementById('message').style.display = 'block';
+            confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+        }
+    </script>
+</body>
+</html>

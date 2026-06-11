@@ -4,21 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ultah Tasya Aulia 🎉</title>
-    <!-- Menggunakan font handwriting yang imut dan estetik -->
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Pinyon+Script&display=swap" rel="stylesheet">
     
     <style>
+        /* Mengaktifkan efek scroll halus di seluruh halaman */
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             display: flex;
             justify-content: center;
             align-items: flex-start; 
-            min-height: 100vh;
+            min-height: 160vh; /* Ruang vertikal halaman agar bisa scroll up/down */
             background-color: #fdf3f4; /* Background pink susu lembut */
             font-family: 'Caveat', cursive; 
             margin: 0;
             padding: 20px;
             box-sizing: border-box;
-            overflow-y: auto; /* Halaman utama bisa di-scroll jika layar hp kecil */
         }
 
         /* CONTAINER UTAMA */
@@ -26,8 +29,8 @@
             position: relative;
             width: 350px;
             height: 420px;
-            margin-top: 220px; /* Jarak aman di atas agar saat surat naik tidak terpotong layar */
-            margin-bottom: 100px;
+            margin-top: 400px; /* Jarak atas agar saat surat naik tidak mentok layar */
+            margin-bottom: 200px;
             cursor: pointer;
         }
 
@@ -42,48 +45,51 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
 
-        /* 2. SURAT UTAMA (Tersembunyi sempurna di dalam) */
+        /* 2. SURAT UTAMA */
         .letter {
             position: absolute;
-            bottom: 10px; /* Duduk manis di atas dasar amplop, tidak akan bocor ke bawah */
+            bottom: 10px; /* Duduk pas di dasar dalam amplop, aman tidak bocor ke bawah */
             left: 15px;
             width: 320px;
-            height: 400px; /* Tinggi disesuaikan agar pas bersembunyi di dalam amplop 420px */
+            height: 400px; 
             background-color: #fffaf0; 
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             
             /* Animasi keluar masuk yang sangat mulus */
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1;
+            transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1; 
             
+            /* Diubah ke visible agar pita di bagian atas tidak terpotong */
+            overflow: visible; 
             display: flex;
             flex-direction: column;
             padding: 25px 20px;
             box-sizing: border-box;
-            overflow: hidden;
         }
 
-        /* KELAS ANIMASI: Menarik surat keluar ke atas */
+        /* KELAS ANIMASI: Menarik surat keluar jauh ke atas */
         .letter.pulled {
-            transform: translateY(-330px); /* Keluar ke atas dengan pas */
+            transform: translateY(-340px); 
         }
 
-        /* TOMBOL PEGANGAN / TAB PENARIK */
+        /* PITA / TAB PENARIK (Sekarang menyembul keluar di atas amplop) */
         .pull-tab {
             position: absolute;
-            top: -28px;
+            top: -35px; /* Angka minus membuat pita keluar menembus batas amplop */
             left: 50%;
             transform: translateX(-50%);
             background-color: #ff8fa3; 
             color: white;
-            padding: 5px 22px;
-            border-radius: 12px 12px 0 0;
-            font-size: 1.4rem;
+            padding: 6px 22px;
+            border-radius: 12px 12px 0 0; /* Bentuk tab kantong imut */
+            font-size: 1.3rem;
             font-weight: bold;
-            box-shadow: 0 -3px 6px rgba(0,0,0,0.05);
-            animation: bounce 2s infinite; 
+            box-shadow: 0 -3px 10px rgba(0,0,0,0.1);
             z-index: 10;
+            
+            /* Efek animasi membal/mentul-mentul agar menarik perhatian */
+            animation: bounce 2s infinite; 
         }
 
         @keyframes bounce {
@@ -101,6 +107,7 @@
             overflow-y: auto; 
             padding-right: 5px;
             box-sizing: border-box;
+            margin-top: 5px;
         }
 
         /* Hiasan scrollbar internal surat */
@@ -157,7 +164,7 @@
             z-index: 5;
         }
 
-        /* 3. BAGIAN DEPAN AMPLOP (Kantong segitiga) */
+        /* 3. BAGIAN DEPAN AMPLOP */
         .envelope-front {
             position: absolute;
             bottom: 0;
@@ -166,9 +173,9 @@
             background-color: #e2b485; 
             border-radius: 8px;
             z-index: 2; 
-            pointer-events: none; /* Klik bisa tembus ke surat */
+            pointer-events: none; 
             
-            /* Pembentuk lipatan kertas */
+            /* Pembentuk lipatan segitiga kraft paper */
             border-top: 210px solid transparent;
             border-right: 175px solid #d4a373; 
             border-bottom: 210px solid #d4a373;
@@ -176,18 +183,18 @@
             box-sizing: border-box;
         }
 
-        /* 4. LAPISAN HIASAN DI ATAS KRAFT PAPER (AMPLOP) */
+        /* 4. LAPISAN HIASAN LUAR KRAFT PAPER */
         .envelope-decor {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 3; /* Berada paling depan di atas amplop */
-            pointer-events: none; /* Sentuhan menembus ke sistem penarik */
+            z-index: 3; 
+            pointer-events: none; 
         }
 
-        /* Label nama bergaya aesthetic rustic di tengah amplop */
+        /* Label nama rustic di tengah amplop */
         .envelope-label {
             position: absolute;
             top: 60%;
@@ -205,24 +212,22 @@
             white-space: nowrap;
         }
 
-        /* Hiasan Bunga-bunga di pojok kiri atas kraft paper */
+        /* Hiasan Bunga di pojok kiri atas kraft paper */
         .decor-flowers-top {
             position: absolute;
             top: 15px;
             left: 15px;
             font-size: 2.2rem;
             opacity: 0.9;
-            filter: drop-shadow(1px 2px 2px rgba(0,0,0,0.1));
         }
 
-        /* Hiasan Hewan Imut & Bunga di pojok kanan bawah kraft paper */
+        /* Hiasan Kucing & Bunga di pojok kanan bawah kraft paper */
         .decor-animals-bottom {
             position: absolute;
             bottom: 15px;
             right: 15px;
             font-size: 2.5rem;
             opacity: 0.95;
-            filter: drop-shadow(1px 2px 2px rgba(0,0,0,0.1));
             text-align: right;
             line-height: 1;
         }
@@ -230,18 +235,13 @@
 </head>
 <body>
 
-    <!-- Klik di area mana saja pada amplop akan memicu keluar/masuknya surat -->
     <div class="container" onclick="toggleLetter()">
         
-        <!-- Lapisan 1: Belakang Amplop -->
         <div class="envelope-back"></div>
         
-        <!-- Lapisan 2: Surat Utama -->
         <div class="letter" id="birthdayLetter">
-            <!-- Pegangan surat -->
             <div class="pull-tab">Tarik Aku ↑</div>
             
-            <!-- Isi Teks Puisi (StopPropagation mencegah surat tertutup otomatis saat scroll teks) -->
             <div class="letter-content" onclick="event.stopPropagation();">
                 <h2>Selamat Ulang Tahun</h2>
                 
@@ -278,22 +278,14 @@
                 </div>
             </div>
 
-            <!-- Hewan di dalam surat -->
             <div class="cute-bunny">🐰</div>
         </div>
 
-        <!-- Lapisan 3: Depan Amplop -->
         <div class="envelope-front"></div>
 
-        <!-- Lapisan 4: Hiasan Luar Kraft Paper (Bunga & Hewan Luar) -->
         <div class="envelope-decor">
-            <!-- Bunga di kiri atas amplop -->
             <div class="decor-flowers-top">🌸🌷🌿</div>
-            
-            <!-- Label Tag Tengah -->
             <div class="envelope-label">Untuk: Tasya Aulia ✨</div>
-            
-            <!-- Hewan & Bunga di kanan bawah amplop -->
             <div class="decor-animals-bottom">
                 <span>🌻🌾</span><br>
                 <span>🐱 hbd!</span>
@@ -303,10 +295,29 @@
     </div>
 
     <script>
-        // Fungsi interaktif untuk tarik-masuk surat secara bergantian (Toggle)
         function toggleLetter() {
             const letter = document.getElementById('birthdayLetter');
+            const container = document.querySelector('.container');
+            
+            // 1. Jalankan animasi keluar / masuk surat
             letter.classList.toggle('pulled');
+            
+            // 2. Fungsi Otomatis Scroll Up & Down halaman secara halus
+            setTimeout(() => {
+                if (letter.classList.contains('pulled')) {
+                    // Jika surat dibuka, otomatis scroll layar ke bawah sedikit agar surat berada di tengah
+                    window.scrollTo({
+                        top: container.offsetTop - 360,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    // Jika surat dimasukkan kembali, layar otomatis scroll memfokuskan ke amplop lagi
+                    window.scrollTo({
+                        top: container.offsetTop - 150,
+                        behavior: 'smooth'
+                    });
+                }
+            }, 150); // Delay singkat untuk menyelaraskan transisi CSS dan scrolling browser
         }
     </script>
 

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Letter Card</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f2f5;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+        }
+
+        /* The container sets the perspective for the 3D effect */
+        .card-container {
+            width: 300px;
+            height: 400px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        /* The card holds the front and back faces */
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        /* When the 'flipped' class is added, rotate the card */
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        /* Common styles for both sides */
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .card-front {
+            background-color: #ff7675;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .card-back {
+            background-color: #ffffff;
+            color: #333;
+            transform: rotateY(180deg);
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container" onclick="this.firstChild.nextSibling.classList.toggle('flipped')">
+        <div class="card">
+            <div class="card-face card-front">
+                <p>Tap to open my letter!</p>
+            </div>
+            <div class="card-face card-back">
+                <h3>Dear You,</h3>
+                <p>This is a secret note hidden inside the card. I hope you are having a wonderful day!</p>
+                <p>— From, Your AI Collaborator</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // The toggle logic is handled directly in the onclick attribute
+        // but can be moved here for more complex interactions.
+    </script>
+</body>
+</html>

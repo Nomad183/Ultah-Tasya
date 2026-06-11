@@ -1,72 +1,92 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Untuk Tasya Aulia</title>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Letter Card</title>
     <style>
-        body { 
-            font-family: 'Segoe UI', Tahoma, sans-serif; 
-            text-align: center; 
-            background: #fff5f7; 
-            margin: 0; 
-            padding: 20px;
+        body {
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            min-height: 100vh;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f2f5;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
         }
-        .card { 
-            background: white; 
-            padding: 30px; 
-            border-radius: 25px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
-            width: 90%; 
-            max-width: 400px;
-            cursor: pointer; 
-            transition: transform 0.2s;
+
+        /* The container sets the perspective for the 3D effect */
+        .card-container {
+            width: 300px;
+            height: 400px;
+            perspective: 1000px;
+            cursor: pointer;
         }
-        .card:active { transform: scale(0.95); }
-        h1 { color: #ff4d6d; font-size: 1.5rem; }
-        #message { display: none; margin-top: 30px; color: #444; line-height: 1.6; }
-        em { color: #d63384; font-style: italic; }
+
+        /* The card holds the front and back faces */
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        /* When the 'flipped' class is added, rotate the card */
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        /* Common styles for both sides */
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .card-front {
+            background-color: #ff7675;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .card-back {
+            background-color: #ffffff;
+            color: #333;
+            transform: rotateY(180deg);
+            flex-direction: column;
+            justify-content: flex-start;
+        }
     </style>
 </head>
 <body>
 
-    <div class="card" onclick="bukaKejutan()">
-        <h1 style="font-size: 3rem;">🎁</h1>
-        <p>Sentuh kotak ini untuk membuka pesan spesial!</p>
-    </div>
-
-    <div id="message">
-        <h2 style="color: #ff4d6d;">Selamat Ulang Tahun, Tasya Aulia!</h2>
-        <p style="white-space: pre-line;">
-            <em>"Di antara langkah yang terus berpijak,
-            Hari ini, waktu sejenak berbisik tenang.
-            Membawa cerita tentang doa yang tak pernah lelah tergerak,
-            Tentang mimpi-mimpi indah yang perlahan mulai terang.
-
-            Tasya Aulia,
-            Di usia yang baru, ku titipkan doa dalam sunyi,
-            Semoga langkahmu selalu ringan meniti hari.
-            Setiap harap yang kau simpan dalam hati,
-            Tuhan dekap, menjadikannya nyata di waktu yang pasti.
-
-            Teruslah bermimpi, meski langit tampak tinggi,
-            Sebab di matamu, masa depan telah menanti.
-            Selamat ulang tahun, semoga bahagia selalu memelukmu,
-            Dalam setiap detik yang kau lalui sepanjang waktu."</em>
-        </p>
+    <div class="card-container" onclick="this.firstChild.nextSibling.classList.toggle('flipped')">
+        <div class="card">
+            <div class="card-face card-front">
+                <p>Tap to open my letter!</p>
+            </div>
+            <div class="card-face card-back">
+                <h3>Dear You,</h3>
+                <p>This is a secret note hidden inside the card. I hope you are having a wonderful day!</p>
+                <p>— From, Your AI Collaborator</p>
+            </div>
+        </div>
     </div>
 
     <script>
-        function bukaKejutan() {
-            document.getElementById('message').style.display = 'block';
-            confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
-        }
+        // The toggle logic is handled directly in the onclick attribute
+        // but can be moved here for more complex interactions.
     </script>
 </body>
 </html>

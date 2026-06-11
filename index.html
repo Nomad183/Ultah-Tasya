@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Handmade Pull Card</title>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <title>Ultah Tasya Aulia 🎉</title>
+    <!-- Menggunakan font handwritting yang imut dan estetik -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Pinyon+Script&display=swap" rel="stylesheet">
     
     <style>
         body {
@@ -12,134 +13,239 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #fdf3f4; /* Soft blush background */
-            font-family: 'Caveat', cursive; /* Handwritten DIY feel */
+            background-color: #fdf3f4; /* Background pink susu lembut */
+            font-family: 'Caveat', cursive; /* Font utama DIY */
             margin: 0;
-            overflow: hidden; /* Prevents scrolling when the card pulls up */
+            overflow: hidden; /* Mencegah scrollbar muncul saat surat ditarik */
         }
 
         .container {
             position: relative;
-            width: 320px;
+            width: 340px;
             height: 250px;
         }
 
-        /* The back of the envelope */
+        /* Bagian belakang amplop (craft paper) */
         .envelope-back {
             position: absolute;
             bottom: 0;
             width: 100%;
             height: 200px;
-            background-color: #c99368; /* Darker craft paper color */
+            background-color: #c99368; 
             border-radius: 5px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
-        /* The Letter inside */
+        /* SURAT UTAMA (Bagian yang ditarik) */
         .letter {
             position: absolute;
-            bottom: 10px;
+            bottom: 15px; /* Sedikit naik dari dasar amplop */
             left: 10px;
-            width: 300px;
-            height: 380px;
-            background-color: #fffaf0; /* Warm off-white paper */
+            width: 320px;
+            /* TINGGI DIPERPANJANG agar puisi muat */
+            height: 650px; 
+            background-color: #fffaf0; /* Kertas putih tulang hangat */
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1; /* Sits between the back and front of the envelope */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            
+            /* Animasi tarikan diperhalus */
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1; /* Di antara belakang dan depan amplop */
+            
             display: flex;
             flex-direction: column;
-            padding: 25px 20px;
+            padding: 30px 25px;
             box-sizing: border-box;
             cursor: pointer;
+            overflow: hidden; /* Menjaga hiasan tidak keluar kertas */
         }
 
-        /* The animation class that slides the letter up */
+        /* HIASAN: Taburan Hati di Kertas Surat */
+        .letter::before {
+            content: "♥ ♥   ♥  ♥    ♥   ♥ ♥  ♥";
+            position: absolute;
+            top: 60px;
+            left: 20px;
+            width: 100%;
+            color: rgba(255, 143, 163, 0.3); /* Pink transparan */
+            font-size: 1.2rem;
+            letter-spacing: 15px;
+            z-index: 0;
+        }
+
+        /* KELAS ANIMASI: Menarik surat jauh ke atas */
         .letter.pulled {
-            transform: translateY(-240px);
+            /* Jarak tarik ditambah agar surat panjang terlihat semua */
+            transform: translateY(-500px); 
         }
 
-        /* The little tab sticking out the top */
+        /* Tombol PULL ME (Tab pink di atas) */
         .pull-tab {
             position: absolute;
-            top: -25px;
+            top: -28px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: #ff8fa3;
+            background-color: #ff8fa3; /* Pink cerah */
             color: white;
-            padding: 4px 18px;
-            border-radius: 10px 10px 0 0;
-            font-size: 1.4rem;
-            animation: bounce 2s infinite; /* Gentle bouncing animation */
+            padding: 5px 20px;
+            border-radius: 12px 12px 0 0;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            animation: bounce 2s infinite; /* Efek membal tarik perhatian */
+            z-index: 10;
         }
 
-        /* Keyframes for the bouncing tab to grab attention */
+        /* Keyframes untuk animasi tombol membal */
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
-            40% { transform: translate(-50%, -8px); }
-            60% { transform: translate(-50%, -4px); }
+            40% { transform: translate(-50%, -10px); }
+            60% { transform: translate(-50%, -5px); }
         }
 
         .letter-content {
             color: #4a4a4a;
-        }
-
-        .letter h2 {
-            color: #d81b60; /* Deep pink for the header */
-            margin-bottom: 5px;
-            font-size: 2.2rem;
+            position: relative;
+            z-index: 2; /* Di atas hiasan hati */
             text-align: center;
         }
 
-        .letter p {
-            font-size: 1.5rem;
-            line-height: 1.1;
-            margin: 8px 0;
+        /* Judul Spesial untuk Tasya */
+        .letter h2 {
+            font-family: 'Pinyon Script', cursive; /* Font latin elegan */
+            color: #d81b60; 
+            margin-top: 10px;
+            margin-bottom: 25px;
+            font-size: 2.8rem;
+            font-weight: normal;
+            position: relative;
         }
 
-        /* The front of the envelope that hides the bottom of the letter */
+        /* HEWAN IMUT 1: Kupu-kupu di dekat judul */
+        .letter h2::after {
+            content: "🦋";
+            position: absolute;
+            top: -15px;
+            right: 15px;
+            font-size: 1.5rem;
+            opacity: 0.8;
+        }
+
+        /* Gaya teks PUISI */
+        .poem-body {
+            font-size: 1.35rem; /* Sedikit dikecilkan agar muat banyak */
+            line-height: 1.4; /* Jarak antar baris dipersempit sedikit */
+            text-align: left;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        /* Spasi antar bait puisi */
+        .stanza {
+            margin-bottom: 18px;
+            display: block;
+        }
+
+        /* Bagian Penutup/Tanda Tangan */
+        .signature {
+            text-align: right;
+            font-size: 1.4rem;
+            margin-top: 20px;
+            margin-right: 10px;
+            color: #d81b60;
+        }
+
+        /* HEWAN IMUT 2: Kelinci di sudut kiri bawah */
+        .cute-bunny {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            font-size: 3.5rem;
+            opacity: 0.9;
+            z-index: 1;
+        }
+
+        /* Bagian depan amplop (membentuk kantong) */
         .envelope-front {
             position: absolute;
             bottom: 0;
             width: 100%;
             height: 200px;
-            background-color: #e2b485; /* Main craft paper color */
+            background-color: #e2b485; /* Craft paper lebih terang */
             border-radius: 5px;
-            z-index: 2; /* Sits in front of the letter */
-            pointer-events: none; /* Allows you to click the letter "through" the envelope */
+            z-index: 2; /* Di depan surat */
+            pointer-events: none; /* Klik bisa menembus amplop ke surat */
             
-            /* CSS trick to create the folded envelope triangles */
+            /* CSS Triangles untuk efek lipatan kertas */
             border-top: 100px solid transparent;
-            border-right: 160px solid #d4a373;
+            border-right: 170px solid #d4a373; /* Bayangan lipatan */
             border-bottom: 100px solid #d4a373;
-            border-left: 160px solid #e2b485;
+            border-left: 170px solid #e2b485;
             box-sizing: border-box;
+            box-shadow: inset 0 5px 15px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body>
 
     <div class="container">
+        <!-- Layer 1: Belakang Amplop -->
         <div class="envelope-back"></div>
         
-        <div class="letter" id="myLetter" onclick="toggleLetter()">
-            <div class="pull-tab">Pull Me ↑</div>
+        <!-- Layer 2: Surat (Yang bisa ditarik) -->
+        <div class="letter" id="birthdayLetter" onclick="toggleLetter()">
+            <!-- Tombol Penarik -->
+            <div class="pull-tab">Tarik Aku ↑</div>
+            
+            <!-- Konten Isi Surat -->
             <div class="letter-content">
-                <h2>Happy Birthday!</h2>
-                <p>Dearest You,</p>
-                <p>I hope your day is as bright and wonderful as this little handmade card.</p>
-                <p>Wishing you all the best today, tomorrow, and always!</p>
-                <p style="text-align: right; margin-top: 20px;">With Love, <br>Your Name</p>
+                <h2>Selamat Ulang Tahun</h2>
+                
+                <div class="poem-body">
+                    <span class="stanza">
+                        Di antara langkah yang terus berpijak,<br>
+                        Hari ini, waktu sejenak berbisik tenang.<br>
+                        Membawa cerita tentang doa yang tak pernah lelah tergerak,<br>
+                        Tentang mimpi-mimpi indah yang perlahan mulai terang.
+                    </span>
+
+                    <span class="stanza" style="color: #d81b60; font-weight: bold; font-size: 1.5rem; text-align: center; display: block;">
+                        Tasya Aulia,
+                    </span>
+
+                    <span class="stanza">
+                        Di usia yang baru, ku titipkan doa dalam sunyi,<br>
+                        Semoga langkahmu selalu ringan meniti hari.<br>
+                        Setiap harap yang kau simpan dalam hati,<br>
+                        Tuhan dekap, menjadikannya nyata di waktu yang pasti.
+                    </span>
+
+                    <span class="stanza">
+                        Teruslah bermimpi, meski langit tampak tinggi,<br>
+                        Sebab di matamu, masa depan telah menanti.<br>
+                        Selamat ulang tahun, semoga bahagia selalu memelukmu,<br>
+                        Dalam setiap detik yang kau lalui sepanjang waktu.
+                    </span>
+                </div>
+
+                <div class="signature">
+                    Dengan Tulus,<br>
+                    [Nama Kamu]
+                </div>
             </div>
+
+            <!-- Hewan Imut: Kelinci -->
+            <div class="cute-bunny">🐰</div>
         </div>
 
+        <!-- Layer 3: Depan Amplop -->
         <div class="envelope-front"></div>
     </div>
 
     <script>
-        // Simple JavaScript to toggle the 'pulled' class when clicked
+        // Fungsi sederhana untuk menambah/menghapus kelas 'pulled' saat diklik
         function toggleLetter() {
-            const letter = document.getElementById('myLetter');
+            const letter = document.getElementById('birthdayLetter');
             letter.classList.toggle('pulled');
         }
     </script>
